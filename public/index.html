@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liminal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+    <script type="module" src="./firebase-config.js"></script>
+</head>
+<body>
+
+    <div id="initialScreen">
+        <h1 id="welcomeHeading">Liminal</h1>
+        <button id="startButton">始める</button>
+    </div>
+    
+   <!-- アカウント作成画面 -->
+   <div id="accountCreation" style="display: none;">
+    <h1>アカウント作成</h1>
+    <form id="accountForm">
+        <div>
+            <label for="username">ユーザーネーム:</label>
+            <input type="text" id="username" name="username" placeholder="ユーザーネームを入力" required>
+        </div>
+        <div>
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" placeholder="メールアドレスを入力" required>
+        </div>
+        <div>
+            <label for="password">パスワード:</label>
+            <input type="password" id="password" name="password" placeholder="パスワードを入力" required>
+        </div>
+        <button type="submit" id="submitAccountForm">登録</button>
+    </form>
+</div>
+
+
+<div id="verification" style="display: none;">
+    <h1>メール認証</h1>
+    <p>登録したメールアドレスに送信された5桁の認証コードを入力してください。</p>
+    <input type="text" id="verificationCode" placeholder="認証コード" required />
+    <button id="verifyButton">認証</button>
+</div>
+
+    <!-- 既存コード -->
+    <h1 id="appHeading">Liminal</h1>
+    <button id="btn">ライトモードにする</button>
+
+    <div class="screen" id="timeline" style="display: none;">
+        <div id="postsContainer"></div>
+    </div>
+
+    <div class="screen" id="search" style="display: none;">
+        <h2>検索</h2>
+    </div>
+
+    <div class="screen" id="post" style="display: none;">
+        <textarea id="postContent" placeholder="今何してる"></textarea>
+        <button id="photos">写真を追加</button>
+        <input type="file" id="photoInput" accept="image/*" style="display: none;">
+        <button id="submitPost">投稿</button>
+        <p>100文字以内で記入してください</p>
+        <p>現在 <span id="count">0</span> 文字</p>
+    </div>
+
+    <div class="screen" id="notifications" style="display: none;">
+        <h2>通知</h2>
+    </div>
+
+    <div class="screen" id="profile" style="display: none;">
+        <div id="profileDisplay">
+            <div class="iconContainer">
+                <input type="file" id="fileInput" accept="image/*" onchange="updateProfileIcon()" style="display: none;" />
+                <img id="profileIcon" src="icon.png" alt="😔" onclick="document.getElementById('fileInput').click()" />
+            </div>
+            <div class="profile-info">
+                <p id="profileName">名前: ユーザー名</p>
+                <p id="profileId">ID: user1234</p>
+                <p id="profileBio">自己紹介: ここに自己紹介を入力</p>
+                <button class="edit-button" onclick="editProfile()">編集</button>
+            </div>
+        </div>
+
+        <div id="editProfileForm" style="display: none;">
+            <div>
+                <label for="newName">名前:</label>
+                <input type="text" id="newName" placeholder="新しい名前を入力">
+            </div>
+            <div>
+                <label for="newId">ID:</label>
+                <input type="text" id="newId" placeholder="新しいIDを入力">
+            </div>
+            <div>
+                <label for="newBio">自己紹介:</label>
+                <textarea id="newBio" placeholder="新しい自己紹介を入力"></textarea>
+            </div>
+            <button onclick="saveProfile()">保存</button>
+            <button onclick="cancelEdit()">キャンセル</button>
+        </div>
+    </div>
+
+    <div class="screen" id="replyPage" style="display: none;">
+        <div id="selectedPost"></div>
+        <div id="repliesContainer"></div>
+        <textarea id="replyContent" placeholder="リプライを入力..."></textarea>
+        <div class="reply-buttons">
+            <button id="backToTimeline" class="animated-button">タイムラインに戻る</button>
+            <button id="postReply" class="animated-button">リプライを投稿</button>
+        </div>
+    </div>
+
+    <div class="bottom-nav" style="display: none;">
+        <button onclick="showScreen('timeline')">ホーム</button>
+        <button onclick="showScreen('search')">検索</button>
+        <button onclick="showScreen('post')">投稿</button>
+        <button onclick="showScreen('notifications')">通知</button>
+        <button onclick="showScreen('profile')">プロフィール</button>
+    </div>
+</body>
+</html>
