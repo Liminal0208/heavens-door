@@ -1,15 +1,13 @@
-module.exports = {
-    extends: [
-      'eslint:recommended',
-      'plugin:node/recommended',
-    ],
-    env: {
-      node: true,
-      es2021: true,
+module.exports = [
+  {
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2020,
+      },
     },
-    parserOptions: {
-      ecmaVersion: 12,
-      sourceType: 'module',
+    files: ['*.js', '*.ts'],
+    rules: {
+      // ルールをここに追加
     },
-  };
-  
+  },
+];

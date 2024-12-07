@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "heavens-door-fd8b3"
+    "default": "heavens-door-fd8b3",
+    "staging": "heavens-door-fd8b3"
   },
   "targets": {},
   "etags": {}
